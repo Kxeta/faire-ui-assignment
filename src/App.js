@@ -8,7 +8,8 @@ class App extends Component {
     return (
       <div className="app">
         <Switch>
-          <Route exact path="/:filter?" component={FaireContainer} />
+          <Route exact path="/" component={FaireContainer} />
+          <Route path="/category/:actualCategory?" component={FaireContainer} />
           <Route component={PageNotFound} />
         </Switch>
       </div>

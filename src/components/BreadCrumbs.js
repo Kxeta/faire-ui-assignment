@@ -11,7 +11,7 @@ const BreadCrumbs = props => (
       {props.breadcrumbsRoutes &&
         props.breadcrumbsRoutes.map((route, index) => (
           <li key={index}>
-            <Link to={route.link}>{route.name}</Link>
+            <Link to={route.linkTo}>{route.name}</Link>
           </li>
         ))}
       <li>{props.actualRoute}</li>

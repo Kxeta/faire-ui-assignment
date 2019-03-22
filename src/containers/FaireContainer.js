@@ -6,29 +6,34 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CategoryActions from '../actions/category';
 import * as MakersActions from '../actions/makers';
-import Sidebar from '../components/SideBar';
+import { List, Sidebar } from '../components';
 
 const defaultCategory = 'All Products';
 
 class FaireContainer extends Component {
   state = {
     actualCategory: null,
-    loading: true,
   };
 
   async componentDidMount() {
     const { actualCategory } = this.props.match.params;
     await this.props.getAllCategories();
-    const makers = await this.props.getMakersWithFilters({
+    await this.props.getMakersWithFilters({
       category: actualCategory,
     });
-    const products = await this.props.getMakerProducts('b_88a8c067');
+    await this.props.getMakerProducts('b_88a8c067');
     this.setState({
       actualCategory: actualCategory || defaultCategory,
-      loading: false,
     });
-    console.log(makers);
-    console.log(products);
+  }
+
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.actualCategory !== this.state.actualCategory) {
+      await this.props.getMakersWithFilters({
+        category: this.state.actualCategory,
+      });
+      await this.props.getMakerProducts('b_88a8c067');
+    }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -53,17 +58,24 @@ class FaireContainer extends Component {
     }));
 
   render() {
-    console.log('State: ', this.props);
     return (
       <div className="faire">
-        {this.state.loading ? (
+        {this.props.utils.isFetchingCategories ? (
           <h1>Loading...</h1>
         ) : (
           <div className="faire-container">
             <BreadCrumbs actualRoute={this.state.actualCategory} />
-            <h1>{this.state.actualCategory}</h1>
             <Sidebar
               list={this.getSidebarCategoryList(this.props.categories)}
+            />
+            <List
+              title={this.state.actualCategory}
+              pagination={
+                this.props.makers && this.props.makers.pagination_data
+              }
+              list={this.props.makers && this.props.makers.brands}
+              isFetchingMakers={this.props.utils.isFetchingMakers}
+              isFetchingMaker={this.props.utils.isFetchingMaker}
             />
           </div>
         )}

@@ -15,7 +15,7 @@ The stack used was:
 
 For the Layout, I tried to keep something clean and close to Faire's, but that is not my area of expertise as you can see... haha
 
-![Some kind of Demo here](http://g.recordit.co/r5tGiFbzbd.gif)
+![Some kind of Demo here](http://g.recordit.co/r5tGiFbzbd.gif) -> If this doesn't work, you can check it [here](http://g.recordit.co/r5tGiFbzbd.gif)
 
 ## Available Scripts
 

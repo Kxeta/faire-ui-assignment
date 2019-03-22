@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import ImageCarousel from './ImageCarousel';
 
 const Card = props => {
   return (
@@ -9,7 +10,7 @@ const Card = props => {
         rel="noopener noreferrer"
         target="_blank"
       >
-        <img src={props.item.images && props.item.images[0].url} />
+        {props.item.images && <ImageCarousel imgList={props.item.images} />}
         <div>{props.item.name}</div>
         <div>
           <span>

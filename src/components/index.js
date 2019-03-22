@@ -4,5 +4,6 @@ import Sidebar from './SideBar';
 import Pagination from './Pagination';
 import Card from './Card';
 import Loader from './Loader';
+import ImageCarousel from './ImageCarousel';
 
-export { BreadCrumbs, Card, List, Loader, Pagination, Sidebar };
+export { BreadCrumbs, Card, ImageCarousel, List, Loader, Pagination, Sidebar };

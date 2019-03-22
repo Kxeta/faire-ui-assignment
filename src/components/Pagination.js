@@ -58,7 +58,6 @@ const Pagination = props => {
 
   const pageListNumbers = () => {
     const { page_count, page_number } = props.paginationData;
-    console.log(props.paginationData);
     const pageList = [];
     addBeforePageHelper(pageList, page_number);
 
@@ -76,7 +75,6 @@ const Pagination = props => {
     return pageList;
   };
 
-  console.log(props.paginationData && pageListNumbers());
   return !props.paginationData ? null : (
     <div className="pagination">
       <button

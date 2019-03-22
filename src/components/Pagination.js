@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import './Pagination.css';
+
 const Pagination = props => {
   const maxPages = 4;
 
@@ -25,7 +27,7 @@ const Pagination = props => {
     }
     if (pageNumber > maxPages / 2 + 2) {
       pageList.push({
-        label: '&hellip;',
+        label: '...',
       });
     }
     for (let i = 0; i < maxPages / 2; i++) {
@@ -51,7 +53,13 @@ const Pagination = props => {
     }
     if (pageNumber < pageCount - (maxPages / 2 + 1)) {
       pageList.push({
-        label: '&hellip;',
+        label: '...',
+      });
+    }
+    if (pageNumber < pageCount) {
+      pageList.push({
+        label: pageCount,
+        goToPage: pageCount,
       });
     }
   };
@@ -67,11 +75,6 @@ const Pagination = props => {
     });
 
     addAfterPageHelper(pageList, page_number, page_count);
-
-    pageList.push({
-      label: page_count,
-      goToPage: page_count,
-    });
     return pageList;
   };
 
@@ -80,24 +83,32 @@ const Pagination = props => {
       <button
         className="pagination-button"
         onClick={e => buttonClickHandler(e, -1)}
+        disabled={props.paginationData.page_number === 1}
       >
         Back
       </button>
       <ul>
         {pageListNumbers().map((element, index) => (
           <li key={index}>
-            <button
-              onClick={element.goToPage && numberButtonClickHandler}
-              data-page={element.goToPage}
-            >
-              {element.label}
-            </button>
+            {element.goToPage ? (
+              <button
+                onClick={element.goToPage && numberButtonClickHandler}
+                data-page={element.goToPage}
+              >
+                {element.label}
+              </button>
+            ) : (
+              element.label
+            )}
           </li>
         ))}
       </ul>
       <button
         className="pagination-button"
         onClick={e => buttonClickHandler(e, 1)}
+        disabled={
+          props.paginationData.page_count === props.paginationData.page_number
+        }
       >
         Next
       </button>

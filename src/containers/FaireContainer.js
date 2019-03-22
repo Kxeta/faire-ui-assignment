@@ -20,6 +20,9 @@ class FaireContainer extends Component {
     await this.props.getAllCategories();
     await this.props.getMakersWithFilters({
       category: actualCategory,
+      pagination_data: {
+        page_size: 60,
+      },
     });
     await this.props.getMakerProducts('b_88a8c067');
     this.setState({
@@ -31,6 +34,9 @@ class FaireContainer extends Component {
     if (prevState.actualCategory !== this.state.actualCategory) {
       await this.props.getMakersWithFilters({
         category: this.state.actualCategory,
+        pagination_data: {
+          page_size: 60,
+        },
       });
       await this.props.getMakerProducts('b_88a8c067');
     }
@@ -45,6 +51,16 @@ class FaireContainer extends Component {
     }
     return null;
   }
+
+  onPageChangeHandler = newPage => {
+    this.props.getMakersWithFilters({
+      category: this.state.actualCategory,
+      pagination_data: {
+        page_size: 60,
+        page_number: newPage,
+      },
+    });
+  };
 
   getSidebarCategoryList = categoryList =>
     categoryList &&
@@ -76,6 +92,7 @@ class FaireContainer extends Component {
               list={this.props.makers && this.props.makers.brands}
               isFetchingMakers={this.props.utils.isFetchingMakers}
               isFetchingMaker={this.props.utils.isFetchingMaker}
+              onPageChangeHandler={this.onPageChangeHandler}
             />
           </div>
         )}

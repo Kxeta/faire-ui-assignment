@@ -46,7 +46,6 @@ export const getMakerProducts = brand => dispatch => {
       return res.json();
     })
     .then(json => {
-      console.log(json);
       dispatch({
         type: GET_MAKER_PRODUCTS,
         payload: { brand, products: json },

@@ -3,21 +3,81 @@ import { PropTypes } from 'prop-types';
 
 const Pagination = props => {
   const maxPages = 4;
+
   const buttonClickHandler = (e, pageAcc) => {
-    const { page_number } = props.pagination_data;
+    const { page_number } = props.paginationData;
     e.preventDefault();
     props.onPageChangeHandler(page_number + pageAcc);
   };
-  const pageListNumbers = () => {
-    const { page_count, page_number } = props.pagination_data;
-    const pageList = [];
-    if (page_number > maxPages) {
+
+  const numberButtonClickHandler = e => {
+    e.preventDefault();
+    const newPage = e.target.getAttribute('data-page');
+    props.onPageChangeHandler(newPage);
+  };
+
+  const addBeforePageHelper = (pageList, pageNumber) => {
+    if (pageNumber > 1) {
+      pageList.push({
+        label: 1,
+        goToPage: 1,
+      });
+    }
+    if (pageNumber > maxPages / 2 + 2) {
+      pageList.push({
+        label: '&hellip;',
+      });
+    }
+    for (let i = 0; i < maxPages / 2; i++) {
+      const beforePageNumber = pageNumber - (maxPages / 2 - i);
+      if (beforePageNumber > 1) {
+        pageList.push({
+          label: beforePageNumber,
+          goToPage: beforePageNumber,
+        });
+      }
+    }
+  };
+
+  const addAfterPageHelper = (pageList, pageNumber, pageCount) => {
+    for (let i = maxPages / 2 - 1; i >= 0; i--) {
+      const afterPageNumber = pageNumber + (maxPages / 2 - i);
+      if (afterPageNumber < pageCount) {
+        pageList.push({
+          label: afterPageNumber,
+          goToPage: afterPageNumber,
+        });
+      }
+    }
+    if (pageNumber < pageCount - (maxPages / 2 + 1)) {
       pageList.push({
         label: '&hellip;',
       });
     }
   };
-  return (
+
+  const pageListNumbers = () => {
+    const { page_count, page_number } = props.paginationData;
+    console.log(props.paginationData);
+    const pageList = [];
+    addBeforePageHelper(pageList, page_number);
+
+    pageList.push({
+      label: page_number,
+      actual: true,
+    });
+
+    addAfterPageHelper(pageList, page_number, page_count);
+
+    pageList.push({
+      label: page_count,
+      goToPage: page_count,
+    });
+    return pageList;
+  };
+
+  console.log(props.paginationData && pageListNumbers());
+  return !props.paginationData ? null : (
     <div className="pagination">
       <button
         className="pagination-button"
@@ -26,9 +86,16 @@ const Pagination = props => {
         Back
       </button>
       <ul>
-        {props.breadcrumbsRoutes &&
-          props.breadcrumbsRoutes.map((route, index) => <li key={index} />)}
-        <li>{props.actualRoute}</li>
+        {pageListNumbers().map((element, index) => (
+          <li key={index}>
+            <button
+              onClick={element.goToPage && numberButtonClickHandler}
+              data-page={element.goToPage}
+            >
+              {element.label}
+            </button>
+          </li>
+        ))}
       </ul>
       <button
         className="pagination-button"
@@ -41,7 +108,7 @@ const Pagination = props => {
 };
 
 Pagination.propTypes = {
-  pagination_data: PropTypes.object,
+  paginationData: PropTypes.object,
   onPageChangeHandler: PropTypes.func,
 };
 

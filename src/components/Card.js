@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 const Card = props => {
-  console.log(props.item);
   return (
     <div className="card">
       <a

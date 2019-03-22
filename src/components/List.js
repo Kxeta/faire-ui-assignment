@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 import Card from './Card';
+import Pagination from './Pagination';
 
 class List extends Component {
   componentDidMount() {}
@@ -23,8 +24,11 @@ class List extends Component {
                     <Card key={index} item={item} />
                   ))}
               </div>
-              );
             </div>
+            <Pagination
+              paginationData={this.props.pagination}
+              onPageChangeHandler={this.props.onPageChangeHandler}
+            />
           </Fragment>
         )}
       </div>
@@ -35,6 +39,7 @@ class List extends Component {
 List.propTypes = {
   list: PropTypes.array,
   pagination: PropTypes.object,
+  onPageChangeHandler: PropTypes.func,
   title: PropTypes.string,
 };
 

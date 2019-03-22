@@ -2,7 +2,15 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import ImageCarousel from './ImageCarousel';
 
+import './Card.css';
+
 const Card = props => {
+  const getImagesList = imageList => {
+    if (imageList.length > 3) {
+      return imageList.slice(0, 3);
+    }
+    return imageList;
+  };
   return (
     <div className="card">
       <a
@@ -10,13 +18,16 @@ const Card = props => {
         rel="noopener noreferrer"
         target="_blank"
       >
-        {props.item.images && <ImageCarousel imgList={props.item.images} />}
-        <div>{props.item.name}</div>
+        {props.item.images && (
+          <ImageCarousel imgList={getImagesList(props.item.images)} />
+        )}
+        <h3>{props.item.name}</h3>
         <div>
-          <span>
-            {`$${props.item.minimum_order_amount_cents / 100} minimum`}
-          </span>
-          {props.item.has_new_products && <span>They have new things!</span>}
+          <p className="minimum-order">{`$${props.item
+            .minimum_order_amount_cents / 100} minimum`}</p>
+          {props.item.has_new_products && (
+            <p className="new-badge">New Things!</p>
+          )}
         </div>
       </a>
     </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import './ImageCarousel.css';
 
 class ImageCarousel extends Component {
   constructor(props) {
@@ -32,8 +33,6 @@ class ImageCarousel extends Component {
         className="image-carousel"
         style={{
           backgroundImage: `url("${this.state.imgUrl}")`,
-          height: '200px',
-          width: '150px',
         }}
       >
         <div className="images-list">

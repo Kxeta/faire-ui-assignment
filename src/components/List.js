@@ -4,6 +4,8 @@ import Card from './Card';
 import Pagination from './Pagination';
 import Loader from './Loader';
 
+import './List.css';
+
 class List extends Component {
   componentDidMount() {}
 
@@ -18,13 +20,11 @@ class List extends Component {
             <h6>{`${
               this.props.pagination ? this.props.pagination.total_results : 0
             } results`}</h6>
-            <div>
-              <div>
-                {this.props.list &&
-                  this.props.list.map((item, index) => (
-                    <Card key={index} item={item} />
-                  ))}
-              </div>
+            <div className="list-view-content">
+              {this.props.list &&
+                this.props.list.map((item, index) => (
+                  <Card key={index} item={item} />
+                ))}
             </div>
             <Pagination
               paginationData={this.props.pagination}

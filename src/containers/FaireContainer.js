@@ -7,8 +7,9 @@ import { connect } from 'react-redux';
 import * as CategoryActions from '../actions/category';
 import * as MakersActions from '../actions/makers';
 import { List, Sidebar } from '../components';
+import { defaultCategory } from '../constants/utils';
 
-const defaultCategory = 'All Products';
+import './FaireContainer.css';
 
 class FaireContainer extends Component {
   state = {
@@ -81,19 +82,21 @@ class FaireContainer extends Component {
         ) : (
           <div className="faire-container">
             <BreadCrumbs actualRoute={this.state.actualCategory} />
-            <Sidebar
-              list={this.getSidebarCategoryList(this.props.categories)}
-            />
-            <List
-              title={this.state.actualCategory}
-              pagination={
-                this.props.makers && this.props.makers.pagination_data
-              }
-              list={this.props.makers && this.props.makers.brands}
-              isFetchingMakers={this.props.utils.isFetchingMakers}
-              isFetchingMaker={this.props.utils.isFetchingMaker}
-              onPageChangeHandler={this.onPageChangeHandler}
-            />
+            <div className="faire-content">
+              <Sidebar
+                list={this.getSidebarCategoryList(this.props.categories)}
+              />
+              <List
+                title={this.state.actualCategory}
+                pagination={
+                  this.props.makers && this.props.makers.pagination_data
+                }
+                list={this.props.makers && this.props.makers.brands}
+                isFetchingMakers={this.props.utils.isFetchingMakers}
+                isFetchingMaker={this.props.utils.isFetchingMaker}
+                onPageChangeHandler={this.onPageChangeHandler}
+              />
+            </div>
           </div>
         )}
       </div>

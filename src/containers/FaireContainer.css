@@ -1,0 +1,7 @@
+.faire-container {
+  display: flex;
+  flex-direction: column;
+}
+.faire-content {
+  display: flex;
+}

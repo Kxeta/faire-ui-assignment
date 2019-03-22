@@ -2,6 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import './BreadCrumbs.css';
+
 const BreadCrumbs = props => (
   <div className="breadcrumbs">
     <ul>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { BreadCrumbs } from '../components';
+import { BreadCrumbs, Loader } from '../components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CategoryActions from '../actions/category';
@@ -77,7 +77,7 @@ class FaireContainer extends Component {
     return (
       <div className="faire">
         {this.props.utils.isFetchingCategories ? (
-          <h1>Loading...</h1>
+          <Loader />
         ) : (
           <div className="faire-container">
             <BreadCrumbs actualRoute={this.state.actualCategory} />

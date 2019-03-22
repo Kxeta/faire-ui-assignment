@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 import Card from './Card';
 import Pagination from './Pagination';
+import Loader from './Loader';
 
 class List extends Component {
   componentDidMount() {}
@@ -11,7 +12,7 @@ class List extends Component {
       <div className="list-view-container">
         <h1>{this.props.title}</h1>
         {this.props.isFetchingMakers ? (
-          <h1>Loading...</h1>
+          <Loader />
         ) : (
           <Fragment>
             <h6>{`${

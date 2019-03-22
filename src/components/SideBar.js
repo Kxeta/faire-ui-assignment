@@ -5,7 +5,7 @@ import { defaultCategory } from '../constants/utils';
 
 import './Sidebar.css';
 
-const Sidebar = props => {
+export const Sidebar = props => {
   const isActualCategory = name => {
     const { actualCategory } = props.match.params;
     if (actualCategory && actualCategory === name) {

@@ -9,7 +9,7 @@ export const getAllCategories = () => dispatch => {
     type: IS_FETCHING_CATEGORIES,
     payload: true,
   });
-  fetch(`${baseURL}/category/new`)
+  return fetch(`${baseURL}/category/new`)
     .then(res => {
       return res.json();
     })

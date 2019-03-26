@@ -9,13 +9,14 @@ const Pagination = props => {
   const buttonClickHandler = (e, pageAcc) => {
     const { page_number } = props.paginationData;
     e.preventDefault();
-    props.onPageChangeHandler(page_number + pageAcc);
+    props.onPageChangeHandler &&
+      props.onPageChangeHandler(page_number + pageAcc);
   };
 
   const numberButtonClickHandler = e => {
     e.preventDefault();
     const newPage = e.target.getAttribute('data-page');
-    props.onPageChangeHandler(newPage);
+    props.onPageChangeHandler && props.onPageChangeHandler(newPage);
   };
 
   const addBeforePageHelper = (pageList, pageNumber) => {
@@ -25,7 +26,7 @@ const Pagination = props => {
         goToPage: 1,
       });
     }
-    if (pageNumber > maxPages / 2 + 2) {
+    if (pageNumber > maxPages) {
       pageList.push({
         label: '...',
       });

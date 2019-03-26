@@ -7,11 +7,13 @@ import './Sidebar.css';
 
 export const Sidebar = props => {
   const isActualCategory = name => {
-    const { actualCategory } = props.match.params;
-    if (actualCategory && actualCategory === name) {
-      return true;
-    } else if (!actualCategory && name === defaultCategory) {
-      return true;
+    if (props.match) {
+      const { actualCategory } = props.match.params;
+      if (actualCategory && actualCategory === name) {
+        return true;
+      } else if (!actualCategory && name === defaultCategory) {
+        return true;
+      }
     }
     return false;
   };

@@ -11,7 +11,7 @@ export const getMakersWithFilters = filters => dispatch => {
     type: IS_FETCHING_MAKERS,
     payload: true,
   });
-  fetch(`${baseURL}/search/makers-with-filters`, {
+  return fetch(`${baseURL}/search/makers-with-filters`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -41,7 +41,7 @@ export const getMakerProducts = brand => dispatch => {
     type: IS_FETCHING_MAKER,
     payload: true,
   });
-  fetch(`${baseURL}/brand/${brand}/products`)
+  return fetch(`${baseURL}/brand/${brand}/products`)
     .then(res => {
       return res.json();
     })
